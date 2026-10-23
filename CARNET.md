@@ -163,7 +163,7 @@ salut
 
 3. Dans l'Access log, retrouvez une requête qui a reçu un code `404`. Quelle page était demandée ?
 
-   > _Ma réponse :_ À compléter avec le chemin exact lu dans mon Access log, par exemple `/favicon.ico` si c'est cette requête qui apparaît avec le code 404.
+   > _Ma réponse :_ GET /favicon.ico HTTP/1.1" 404 207 la favicon etait demander mais introuvable
 
 4. Après cet exercice, que pensez-vous de la notion de « navigation anonyme » ?
 
