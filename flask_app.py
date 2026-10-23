@@ -66,10 +66,23 @@ def salut():
     if request.method == "POST":
         prenom = request.form.get("prenom", "inconnu")
         ville = request.form.get("ville", "nulle part")
+        couleur = request.form.get("couleur", "tomato")
     else:
         prenom = request.args.get("prenom", "inconnu")
         ville = request.args.get("ville", "nulle part")
-    return f"Bonjour {prenom}, qui vient de {ville} ! (reçu en {request.method})"
+        couleur = request.args.get("couleur", "tomato")
+
+    couleurs_autorisees = {"tomato", "teal", "royalblue"}
+    if couleur not in couleurs_autorisees:
+        abort(400, description="La couleur doit être tomato, teal ou royalblue.")
+
+    return render_template(
+        "salut.html",
+        prenom=prenom,
+        ville=ville,
+        couleur=couleur,
+        methode=request.method,
+    )
 
 # ---------------------------------------------------------------
 #  Ne pas modifier : utile seulement pour lancer le site
