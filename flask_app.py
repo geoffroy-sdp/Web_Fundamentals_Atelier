@@ -25,6 +25,10 @@ def accueil():
 #  Ajoutez vos nouvelles routes ci-dessous 👇
 # ---------------------------------------------------------------
 
+# exo 2
+@app.get("/presentation")
+def presentation():
+    return "Je m'appelle Valentin et j'aime le kiri et quand je pete sous l'eau sa fait des bulles"
 
 
 # ---------------------------------------------------------------
