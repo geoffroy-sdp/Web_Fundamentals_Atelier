@@ -28,7 +28,8 @@ def accueil():
 # exo 2
 @app.get("/presentation")
 def presentation():
-    return render_template("presentation.html", prenom="Valentin", nom="Kiri")
+    return render_template("presentation.html", prenom="Valentin", nom="Kiri", loisirs=["Jeux vidéo", "Musique", "Escalade"]
+)
 
 
 # ---------------------------------------------------------------
