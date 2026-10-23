@@ -28,7 +28,16 @@ def accueil():
 # exo 2
 @app.get("/presentation")
 def presentation():
-    return "Je m'appelle Valentin et j'aime le kiri et quand je pete sous l'eau sa fait des bulles"
+    return """
+    <h1>Léa Martin</h1>
+    <p>Je m'appelle <strong>Valentin</strong> et j'aime le kiri et quand je pete sous l'eau sa fait des bulles</p>
+    <h2>Ce que j'aime</h2>
+    <ul>
+        <li>Le kiri</li>
+        <li>Les bubulles</li>
+    </ul>
+    <img src="https://imgs.search.brave.com/GKoxYvenmL0oEsdW4Bw0BjxROj9c2eEOaBKCNtsAaNA/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly9pLmlt/Z2ZsaXAuY29tLzQv/aWlrdHYuanBn" width="100">
+    """
 
 
 # ---------------------------------------------------------------
