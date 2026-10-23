@@ -8,7 +8,7 @@
 #  Les consignes sont dans le dossier "exercices/".
 # ---------------------------------------------------------------
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 
 app = Flask(__name__)
 
@@ -35,10 +35,27 @@ def bonjour(prenom):
 
 @app.get("/calcul")
 def calcul():
-    a = int(request.args.get("a", 0))
-    b = int(request.args.get("b", 0))
-    return f"{a} + {b} = {a + b}"
-    
+    try:
+        a = int(request.args.get("a", 0))
+        b = int(request.args.get("b", 0))
+    except ValueError:
+        abort(400, description="Les paramètres a et b doivent être des nombres entiers.")
+
+    operation = request.args.get("op", "plus")
+    operations = {
+        "plus": ("+", lambda: a + b),
+        "moins": ("-", lambda: a - b),
+        "fois": ("×", lambda: a * b),
+        "divise": ("÷", lambda: a / b if b else abort(
+            400, description="La division par zéro n'est pas autorisée."
+        )),
+    }
+    if operation not in operations:
+        abort(400, description="L'opération doit être plus, moins, fois ou divise.")
+
+    symbole, calculer = operations[operation]
+    return f"{a} {symbole} {b} = {calculer()}"
+
 # ---------------------------------------------------------------
 #  Ne pas modifier : utile seulement pour lancer le site
 #  sur votre propre ordinateur (python flask_app.py)
