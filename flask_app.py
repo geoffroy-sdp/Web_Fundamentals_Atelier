@@ -8,7 +8,9 @@
 #  Les consignes sont dans le dossier "exercices/".
 # ---------------------------------------------------------------
 
-from flask import Flask, render_template, request, abort, redirect
+from flask import Flask, render_template, request, abort, redirect, jsonify
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 app = Flask(__name__)
 
@@ -110,6 +112,19 @@ def moi():
         langues=request.headers.get("Accept-Language"),
         entetes=request.headers,
     )
+
+@app.get("/api/heure")
+def api_heure():
+    maintenant = datetime.now(ZoneInfo("Europe/Paris"))
+    return jsonify({
+        "heure": maintenant.strftime("%H:%M:%S"),
+        "date": maintenant.strftime("%d/%m/%Y"),
+        "message": "Bonjour depuis mon API !",
+    })
+
+@app.get("/horloge")
+def horloge():
+    return render_template("horloge.html")
 
 # ---------------------------------------------------------------
 #  Ne pas modifier : utile seulement pour lancer le site
